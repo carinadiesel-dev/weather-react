@@ -3,8 +3,8 @@
 import { Button } from "./ui/button"
 import { Icons } from "./icons"
 import useWindowSize from "../hooks/useWindowSize";
-// import example from 'public/example.png'
-// import clouds from 'public/Cloud-background.png'
+import example from '../assets/example.png'
+import clouds from '../assets/Cloud-background.png'
 import { useState } from "react";
 import { Search } from "./search";
 
@@ -46,15 +46,15 @@ export function Summary() {
                 <div className="flex flex-col items-center w-screen pt-10 overflow-hidden lg:w-full">
 
                     {/* Weather Icon */}
-                    <div className="relative">
-                        <div className="absolute w-[400%] -left-52 -top-12 opacity-20 overflow-hidden">
-                        <image href="./public/clouds" />
+                    <div className="relative pt-16">
+                        <div className="absolute w-[300%] overflow-hidden -left-52 -top-6 opacity-20">
+                            <img src={clouds} />
                         </div>
                         
-                        <image href="./public/example" width={300} height={300}/>
+                        <img src={example}/>
                     </div>
                     {/* Temperature in Celcius and Farenheit */}
-                    <div className="flex items-center py-7 xl:pt-8">
+                    <div className="flex items-center py-7 xl:pt-28">
                     <span className="text-9xl">5</span>
                     <span className="text-5xl text-muted-foreground">&#176;C</span>
                     </div>
