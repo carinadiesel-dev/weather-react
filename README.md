@@ -18,8 +18,6 @@ Challenge: Create a weather app using an API. Use Front-end libraries like React
 
 Recommend API:  https://openweathermap.org/api/one-call-3 
 
-Challenge from https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv
-
 Originally started on Gitlab : https://gitlab.com/carinadiesel/weather-app
 
 ## Credits
@@ -28,7 +26,7 @@ Originally started on Gitlab : https://gitlab.com/carinadiesel/weather-app
 
 👤 **Design from Dev Challenges**
 
-Challenge from [Dev Challenges](https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv)
+* Challenge from [Dev Challenges](https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv)
 
 👤 **Boilerplate by Farhan H**
 
