@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 // import { useLocation } from './hooks/useLocation'
-
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Icons } from "@/components/icons";
@@ -61,7 +61,9 @@ export function Search() {
       const response = await axios.get(
         `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${apiKey}`
       );
-      console.log(response.data);
+      // console.log(response.data);
+      setOptions(response.data);
+      
     } catch (error) {
       console.log(error);
     }
@@ -98,6 +100,18 @@ export function Search() {
               />
             </div>
           </div>
+          <div>
+          <Tabs defaultValue="account" className="w-[400px]">
+  <TabsList>
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">Make changes to your account here.</TabsContent>
+  <TabsContent value="password">Change your password here.</TabsContent>
+</Tabs>
+          </div>
+          
+
           <div>
             <Button type="submit">Search</Button>
           </div>
