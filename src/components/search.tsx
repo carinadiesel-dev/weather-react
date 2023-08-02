@@ -126,15 +126,15 @@ export function Search() {
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Search for my City</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-3xl">Search for my City</DialogTitle>
+          <DialogDescription className="text-lg">
             Type in the name of your city and click on the "Search City" button,then select the correct option.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
-            <div className="relative grid items-center grid-cols-4 gap-4">
-              <div className="absolute left-3">
+            <div className="relative flex gap-4">
+              <div className="absolute left-3 top-2">
                 <Icons.search stroke="#a09fb1" />
               </div>
               <Input
@@ -146,12 +146,14 @@ export function Search() {
                 value={cityName}
                 className="col-span-3"
               />
-            </div>
-          </div>
-           
-          <div>
+              <div>
             <Button type="submit">Search</Button>
           </div>
+            </div>
+            
+          </div>
+           
+          
         </form>
 {options && <div className="flex flex-col gap-4">
             {options.map((el) => {
