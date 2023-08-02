@@ -128,7 +128,7 @@ export function Search() {
         <DialogHeader>
           <DialogTitle>Search for my City</DialogTitle>
           <DialogDescription>
-            Type in the name of your city and click on the "Search City" button.
+            Type in the name of your city and click on the "Search City" button,then select the correct option.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
@@ -148,59 +148,16 @@ export function Search() {
               />
             </div>
           </div>
-
-          {/* <div>
-  
-          <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-[200px] justify-between"
-        >
-          {/* {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : "Select framework..."} 
-            Search Location ...
-          <ChevronsUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
-        <Command>
-          <CommandInput placeholder="Search location"/>
-          <CommandEmpty>No framework found.</CommandEmpty>
-          <CommandGroup>
-            {/* {frameworks.map((framework) => ( 
-              <CommandItem
-                // key={framework.value}
-                onSelect={(currentValue) => {
-                  setValue(currentValue === value ? "" : currentValue)
-                  setOpen(false)
-                }}
-              >
-                <Check
-                  className={
-                    "mr-2 h-4 w-4"
-                  }
-                />
-              </CommandItem>
-          </CommandGroup>
-        </Command>
-      </PopoverContent>
-    </Popover>
-           </div> 
-          */}
            
           <div>
             <Button type="submit">Search</Button>
           </div>
         </form>
-{options && <div>
+{options && <div className="flex flex-col gap-4">
             {options.map((el) => {
-              return <button onClick={()=> setCities(el)}>
-                {el.name}
-              </button>
+              return <Button size={"lg"} variant={"outline"} onClick={()=> setCities(el)}>
+                {el.name}, {el.country}
+              </Button>
             })}
           </div>}
           
