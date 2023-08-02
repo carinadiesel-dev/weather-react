@@ -16,10 +16,13 @@ import { Search } from "./components/search"
 import { Button } from "./components/ui/button"
 import example from "./assets/example.png"
 import clouds from "./assets/Cloud-background.png"
+import { useLocationContext } from "./context/LocationContext";
 
 function App() {
+  const {cities} = useLocationContext();
   return (
     <section className="flex flex-col lg:flex-row font-raleway">
+      <div>{cities.name}</div>
       <div className={` flex flex-col h-screen gap-8 lg:space-around bg-inherit w-full lg:w-1/4 `}>
         <Summary />
         </div>
