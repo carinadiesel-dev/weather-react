@@ -3,21 +3,7 @@ import axios from "axios";
 import { useRef } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Check, ChevronsUpDown } from "lucide-react"
-
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandDialog,
-} from "@/components/ui/command"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { Check, ChevronsUpDown } from "lucide-react";
 
 // import { useLocation } from './hooks/useLocation'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -33,31 +19,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+
 import { useLocationContext } from "@/context/LocationContext";
-
-// type OptionsList = {
-//   cityName: string
-//   countryCode: string
-// }
-
-// const Options : FunctionComponent<OptionsList> = ({
-//   cityName,
-//   countryCode
-// }) => {
-//   return (
-//     <div>
-//             <Tabs defaultValue="account" className="w-[400px]">
-//               <TabsList>
-//                 <TabsTrigger value="account">Account</TabsTrigger>
-//                 <TabsTrigger value="password">Password</TabsTrigger>
-//               </TabsList>
-//               <TabsContent value="account">
-//                 Make changes to your account here.
-//               </TabsContent>
-//             </Tabs>
-//           </div>
-//   )
-// }
 
 type SearchProps = {};
 
@@ -72,20 +35,6 @@ export function Search() {
      const handleChange = (e) => {
        setquery(e.target.value)
      }
-
-    //  useEffect(() => {
-    //   const down = (e: KeyboardEvent) => {
-    //     if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-    //       e.preventDefault()
-    //       setOpen((open) => !open)
-    //     }
-    //   }
-    //   document.addEventListener("keydown", down)
-    //   return () => document.removeEventListener("keydown", down)
-    // }, [])
-
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
 
   const [cityName, setCityName] = useState("");
 
@@ -102,24 +51,51 @@ export function Search() {
     console.log(cityName);
 
     setCityName(cityName);
-    fetchWeatherData();
+    fetchCityData();
   };
 
-  const fetchWeatherData = async () => {
-    try {
-      const response = await axios.get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${apiKey}`
-      );
+  const [data, setData] = useState();
+
+  // const fetchCityData = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${apiKey}`
+  //     );
       
-      setOptions(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
+  //     setOptions(response.data);
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+    const fetchCityData = async () => {
+      const response =
+        await fetch(
+          `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${apiKey}`
+        )
+
+      // set state when the data received
+
+      // if (!response.ok){
+      //       alert("This wasn't ok")
+      //     }
+        
+      const parsedResponse = await response.json();
+      setOptions(parsedResponse);
+      console.log(parsedResponse);
+      
+    };
+
+    const closeSearchWindow = () => {
+      setOpen(false);
     }
-  };
+
+ 
+
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="secondary">Search</Button>
       </DialogTrigger>
@@ -157,7 +133,8 @@ export function Search() {
         </form>
 {options && <div className="flex flex-col gap-4">
             {options.map((el) => {
-              return <Button size={"lg"} variant={"outline"} onClick={()=> setCities(el)}>
+              return <Button size={"lg"} variant={"outline"} onClick={()=> {setCities(el);
+              setOpen(false)}}>
                 {el.name}, {el.country}
               </Button>
             })}

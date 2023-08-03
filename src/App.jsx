@@ -17,9 +17,33 @@ import { Button } from "./components/ui/button"
 import example from "./assets/example.png"
 import clouds from "./assets/Cloud-background.png"
 import { useLocationContext } from "./context/LocationContext";
+import { useWeatherContext } from "./context/WeatherContext";
+import { useState } from "react";
+
 
 function App() {
+  const apiKey = import.meta.env.VITE_API_KEY;
+
   const {cities} = useLocationContext();
+  const lat = cities.lat;
+  const lon = cities.lon;
+
+  const [weatherNow,setWeatherNow] = useState([]);
+  
+  const fetchWeatherNowData = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid={${apiKey}}`
+      );
+      
+      // setWeatherNow(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
   return (
     <section className="flex flex-col lg:flex-row font-raleway">
       <div>{cities.name}</div>
