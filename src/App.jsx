@@ -17,36 +17,42 @@ import { Button } from "./components/ui/button"
 import example from "./assets/example.png"
 import clouds from "./assets/Cloud-background.png"
 import { useLocationContext } from "./context/LocationContext";
-import { useWeatherContext } from "./context/WeatherContext";
 import { useState } from "react";
-
+import { useEffect } from "react";
+import { useWeatherContext } from "./context/WeatherContext";
+import { WeatherContextProvider } from './context/WeatherContext.tsx'
 
 function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
 
-  const {cities} = useLocationContext();
-  const lat = cities.lat;
-  const lon = cities.lon;
+  // const {cities} = useLocationContext();
 
-  const [weatherNow,setWeatherNow] = useState([]);
-  
-  const fetchWeatherNowData = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid={${apiKey}}`
-      );
-      
-      // setWeatherNow(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const {todayWeather, setTodayWeather} = useWeatherContext();
 
+  // const lat = cities.lat;
+  // const lon = cities.lon;
+
+
+  // const fetchWeatherData = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+  //     );
+  //     const parsedResponse = await response.json();
+  //     setWeatherNow(parsedResponse);
+  //     console.log(parsedResponse);
+  //   } catch (error) {
+  //     console.error('Error fetching weather data:', error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchWeatherData();
+  // }, [lat, lon]);
 
   return (
     <section className="flex flex-col lg:flex-row font-raleway">
-      <div>{cities.name}</div>
+      <WeatherContextProvider>
       <div className={` flex flex-col h-screen gap-8 lg:space-around bg-inherit w-full lg:w-1/4 `}>
         <Summary />
         </div>
@@ -64,7 +70,8 @@ function App() {
       <div className="w-3/4">
         <Highlights />
       </div>
-    </div>   
+    </div>  
+    </WeatherContextProvider> 
     </section>
   );
 }

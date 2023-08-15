@@ -7,6 +7,8 @@ import example from '../assets/example.png'
 import clouds from '../assets/Cloud-background.png'
 import { useState } from "react";
 import { Search } from "./search";
+import { useLocationContext } from "../context/LocationContext";
+import { useWeatherContext } from "@/context/WeatherContext";
 
 type SummaryProps = {
     temperature: number,
@@ -20,15 +22,18 @@ type SummaryProps = {
 export function Summary() {
     const {width,height} = useWindowSize();
     const searchBtnSize = width >= 1024 ? `lg` : `xl`; 
-    const iconSize = width >= 1024 ? 24 : 48
+    const iconSize = width >= 1024 ? 24 : 48;
 
     const [isShown, setIsShown] = useState(false);
+    const {cities} = useLocationContext();
+    const {weatherNow} = useWeatherContext();
+    
 
   const handleClick = () => {
     // toggle visibility
     setIsShown(current => !current);
-    
   };
+  
     return(
         
         <div className="relative overflow-hidden lg:h-screen bg-mediumBlue">
@@ -73,7 +78,7 @@ export function Summary() {
                 <div className="flex justify-center gap-2 py-5 pb-16 text-lg">
                     <Icons.mapPin stroke="#a09fb1" strokeWidth={1}/>
                     {/* Location */}
-                    <span className="text-muted-foreground">Location</span>
+                    <span className="text-muted-foreground">{cities && `${cities.name}, ${cities.country}`}</span>
                 </div>
             </div>
             

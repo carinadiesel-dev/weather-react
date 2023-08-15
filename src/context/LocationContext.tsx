@@ -1,10 +1,18 @@
 import { createContext, useContext } from 'react';
 import { useState } from 'react';
 
+interface City {
+  city : string,
+  country: string,
+  lat: number,
+  lon: number,
+}
+
 export const LocationContext = createContext({
         cities: [],
-        addCity: (name, lat, lon) => { },
       });
+
+      // addCity: (name, lat, lon) => { },
 
       // Context
       // Context Provider
@@ -12,7 +20,6 @@ export const LocationContext = createContext({
 
 export const LocationContextProvider = ({children}) => {
       const [cities,setCities] = useState([]);
-
       return <LocationContext.Provider value={{cities,setCities}}> 
         {children}
       </LocationContext.Provider> 
