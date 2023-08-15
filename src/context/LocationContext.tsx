@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 import { useState } from 'react';
 
-interface City {
+type City = {
   city : string,
   country: string,
   lat: number,
@@ -10,6 +10,7 @@ interface City {
 
 export const LocationContext = createContext({
         cities: [],
+        // cities: Array<City>,
       });
 
       // addCity: (name, lat, lon) => { },

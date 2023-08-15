@@ -38,7 +38,7 @@ export function Summary() {
         
         <div className="relative overflow-hidden lg:h-screen bg-mediumBlue">
             <div className="flex flex-col">
-
+                {/* <div>{weatherNow}</div> */}
                 <div className="flex justify-between px-5 py-5">
                     <Search />
                     <div className="flex items-center justify-center p-2 rounded-full bg-secondary">

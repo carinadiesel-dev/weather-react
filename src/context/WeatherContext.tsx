@@ -2,11 +2,11 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { LocationContext, useLocationContext } from './LocationContext';
 
  export const WeatherContext = createContext({
-  forecastToday : []
+  weatherNow : []
 });
 
-export const WeatherContextProvider = ({ children }) => {
-  const [weatherNow, setWeatherNow] = useState({});
+export const WeatherContextProvider = ({ children}) => {
+  const [weatherNow, setWeatherNow] = useState([]);
   const {cities} = useLocationContext();
   const apiKey = import.meta.env.VITE_API_KEY;
  
@@ -18,6 +18,7 @@ export const WeatherContextProvider = ({ children }) => {
       );
       const parsedResponse = await response.json();
       setWeatherNow(parsedResponse);
+      console.log(parsedResponse)
     } catch (error) {
       console.error('Error fetching weather data:', error);
     }
@@ -25,8 +26,12 @@ export const WeatherContextProvider = ({ children }) => {
 
   useEffect(() => {
     fetchWeatherData();
-  }, [cities]);
+  }, [cities.lat,cities.lon]);
 
+
+  return <WeatherContext.Provider value={{weatherNow,setWeatherNow}}> 
+  {children}
+</WeatherContext.Provider> 
 }
 
 export const useWeatherContext = () => {
