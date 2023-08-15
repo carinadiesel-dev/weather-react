@@ -43,11 +43,18 @@ export function Search() {
 
   const {cities,setCities} = useLocationContext();
 
+
+  useEffect(() => {
+    // This will trigger the fetchCityData function when cityName changes
+    if (cityName) {
+      fetchCityData();
+    }
+  }, [cityName]);
+
   const handleSubmit = (event) => {
     // console.log("handleSubmit ran");
-    event.preventDefault(); // 👈️ prevent page refresh
+    event.preventDefault();
 
-    // 👇️ access input values here
     console.log(cityName);
 
     setCityName(cityName);
@@ -56,43 +63,19 @@ export function Search() {
 
   const [data, setData] = useState();
 
-  // const fetchCityData = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${apiKey}`
-  //     );
-      
-  //     setOptions(response.data);
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
     const fetchCityData = async () => {
-      const response =
-        await fetch(
+
+      try {
+        const response = await fetch(
           `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${apiKey}`
-        )
-
-      // set state when the data received
-
-      // if (!response.ok){
-      //       alert("This wasn't ok")
-      //     }
-        
-      const parsedResponse = await response.json();
-      setOptions(parsedResponse);
-      console.log(parsedResponse);
-      
+        );
+        const parsedResponse = await response.json();
+        setOptions(parsedResponse);
+        console.log(parsedResponse);
+      } catch (error) {
+        console.error('Error fetching city data:', error);
+      }
     };
-
-    const closeSearchWindow = () => {
-      setOpen(false);
-    }
-
- 
-
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -132,7 +115,7 @@ export function Search() {
           
         </form>
 {options && <div className="flex flex-col gap-4">
-            {options.map((el) => {
+            {options?.map((el) => {
               return <Button size={"lg"} variant={"outline"} onClick={()=> {setCities(el);
               setOpen(false)}}>
                 {el.name}, {el.country}
