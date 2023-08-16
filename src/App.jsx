@@ -30,7 +30,7 @@ function App() {
       <div className={` flex flex-col h-screen gap-8 lg:space-around bg-inherit w-full lg:w-1/4 `}>
         <Summary />
         </div>
-        </WeatherContextProvider>
+        
 
   <div className="flex flex-col items-center justify-around lg:w-4/5">
       <div className="flex flex-col w-3/4 gap-8 lg:gap-2 xl:gap lg:justify-between xl:flex-row">
@@ -44,7 +44,8 @@ function App() {
       <div className="w-3/4">
         <Highlights />
       </div>
-    </div>  
+    </div>
+    </WeatherContextProvider>  
     </section>
   );
 }
