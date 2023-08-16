@@ -26,9 +26,9 @@ export function Summary() {
 
     const [isShown, setIsShown] = useState(false);
     const {cities} = useLocationContext();
+    
     const {weatherNow} = useWeatherContext();
     
-
   const handleClick = () => {
     // toggle visibility
     setIsShown(current => !current);
@@ -37,8 +37,8 @@ export function Summary() {
     return(
         
         <div className="relative overflow-hidden lg:h-screen bg-mediumBlue">
+            {/* <div>{weatherNow.visibility}</div> */}
             <div className="flex flex-col">
-                {/* <div>{weatherNow}</div> */}
                 <div className="flex justify-between px-5 py-5">
                     <Search />
                     <div className="flex items-center justify-center p-2 rounded-full bg-secondary">

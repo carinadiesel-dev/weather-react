@@ -9,7 +9,9 @@ import { WeatherContextProvider } from './context/WeatherContext.tsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <LocationContextProvider>
+    {/* <WeatherContextProvider> */}
       <App />
+      {/* </WeatherContextProvider> */}
     </LocationContextProvider>
   </React.StrictMode>,
 )

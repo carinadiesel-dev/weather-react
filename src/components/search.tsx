@@ -116,7 +116,7 @@ export function Search() {
         </form>
 {options && <div className="flex flex-col gap-4">
             {options?.map((el) => {
-              return <Button size={"lg"} variant={"outline"} onClick={()=> {setCities(el);
+              return <Button key={el} size={"lg"} variant={"outline"} onClick={()=> {setCities(el);
               setOpen(false)}}>
                 {el.name}, {el.country}
               </Button>

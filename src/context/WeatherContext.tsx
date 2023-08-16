@@ -1,9 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { LocationContext, useLocationContext } from './LocationContext';
 
- export const WeatherContext = createContext({
-  weatherNow : []
-});
+ export const WeatherContext = createContext({cities: []});
 
 export const WeatherContextProvider = ({ children}) => {
   const [weatherNow, setWeatherNow] = useState([]);
@@ -14,11 +12,12 @@ export const WeatherContextProvider = ({ children}) => {
   const fetchWeatherData = async () => {
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${cities.lat}&lon=${cities.lon}&appid=${apiKey}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${cities.lat}&lon=${cities.lon}&appid=${apiKey}&units=metric`
       );
       const parsedResponse = await response.json();
       setWeatherNow(parsedResponse);
-      console.log(parsedResponse)
+      console.log(parsedResponse);
+      // console.log(weatherNow);
     } catch (error) {
       console.error('Error fetching weather data:', error);
     }
