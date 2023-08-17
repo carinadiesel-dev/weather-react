@@ -19,6 +19,9 @@ type SummaryProps = {
 
 
 
+// TODO :
+//  1.) Maybe add a "feels like" temp index
+
 export function Summary() {
     const {width,height} = useWindowSize();
     const searchBtnSize = width >= 1024 ? `lg` : `xl`; 
@@ -29,6 +32,7 @@ export function Summary() {
     
     const {weatherNow} = useWeatherContext();
     const main = weatherNow.main;
+    const weatherConditions = weatherNow.weather;
     
   const handleClick = () => {
     // toggle visibility
@@ -66,7 +70,7 @@ export function Summary() {
                     </div>
 
                     {/* Weather Condition */}
-                    <span className="py-5 text-5xl xl:py-10 text-muted-foreground">Shower</span>
+                    <span className="py-5 text-5xl xl:py-10 text-muted-foreground">{weatherConditions ? weatherConditions[0].main : "--"}</span>
                 </div>
 
                 <div className="flex justify-center gap-4 py-5 text-xl xl:pt-12">
