@@ -28,6 +28,7 @@ export function Summary() {
     const {cities} = useLocationContext();
     
     const {weatherNow} = useWeatherContext();
+    const main = weatherNow.main;
     
   const handleClick = () => {
     // toggle visibility
@@ -60,7 +61,7 @@ export function Summary() {
                     </div>
                     {/* Temperature in Celcius and Farenheit */}
                     <div className="flex items-center py-7 xl:pt-28">
-                    <span className="text-9xl">5</span>
+                    <span className="text-9xl">{main ? Math.round(main.temp) : "--"}</span>
                     <span className="text-5xl text-muted-foreground">&#176;C</span>
                     </div>
 
