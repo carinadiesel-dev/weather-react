@@ -32,7 +32,9 @@ export function Summary() {
     
     const {weatherNow} = useWeatherContext();
     const main = weatherNow.main;
-    const weatherConditions = weatherNow.weather;
+    const weatherConditions =  weatherNow.weather;
+    const weatherIcon = weatherConditions ? weatherConditions[0].icon : "";
+    const weatherIconSource = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
     
   const handleClick = () => {
     // toggle visibility
@@ -57,11 +59,11 @@ export function Summary() {
 
                     {/* Weather Icon */}
                     <div className="relative pt-16">
-                        <div className="absolute w-[300%] overflow-hidden -left-52 -top-6 opacity-20">
+                        <div className="absolute overflow-hidden w-[35rem] -left-64 -top-10 opacity-20">
                             <img src={clouds} />
                         </div>
                         
-                        <img src={example}/>
+                        <img src={weatherIcon !== undefined ? weatherIconSource : example}/>
                     </div>
                     {/* Temperature in Celcius and Farenheit */}
                     <div className="flex items-center py-7 xl:pt-28">
