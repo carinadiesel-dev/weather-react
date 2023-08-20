@@ -34,7 +34,12 @@ export function Summary() {
     const main = weatherNow.main;
     const weatherConditions =  weatherNow.weather;
     const weatherIcon = weatherConditions ? weatherConditions[0].icon : "";
-    const weatherIconSource = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
+    const weatherIconSource = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
+    let current = new Date();
+    let month = current.toLocaleString('default', { month: 'long' });
+    let date = `${current.getDate()} ${month}`;
+
+    
     
   const handleClick = () => {
     // toggle visibility
@@ -79,7 +84,7 @@ export function Summary() {
                     <span className="text-muted-foreground">Today</span>
                     <span className="text-muted-foreground">&#x2022;</span>
                     {/* Date */}
-                    <span className="text-muted-foreground">Date</span>
+                    <span className="text-muted-foreground">{date}</span>
                 </div>
 
                 <div className="flex justify-center gap-2 py-5 pb-16 text-lg">

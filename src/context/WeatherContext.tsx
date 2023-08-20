@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { LocationContext, useLocationContext } from './LocationContext';
 
- export const WeatherContext = createContext({cities: []});
+ export const WeatherContext = createContext({
+  cities: [],
+});
 
 export const WeatherContextProvider = ({ children}) => {
   const [weatherNow, setWeatherNow] = useState([]);
@@ -40,4 +42,3 @@ export const useWeatherContext = () => {
   }
   return context;
 }
-
