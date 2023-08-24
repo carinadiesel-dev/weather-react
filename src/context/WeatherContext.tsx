@@ -7,6 +7,7 @@ import { LocationContext, useLocationContext } from './LocationContext';
 
 export const WeatherContextProvider = ({ children}) => {
   const [weatherNow, setWeatherNow] = useState([]);
+
   const {cities} = useLocationContext();
   const apiKey = import.meta.env.VITE_API_KEY;
  
@@ -24,6 +25,8 @@ export const WeatherContextProvider = ({ children}) => {
       console.error('Error fetching weather data:', error);
     }
   };
+  // api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+
 
   useEffect(() => {
     fetchWeatherData();
@@ -42,3 +45,5 @@ export const useWeatherContext = () => {
   }
   return context;
 }
+
+// Api Call for 5 day forecast : api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
