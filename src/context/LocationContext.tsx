@@ -10,10 +10,7 @@ type City = {
 
 export const LocationContext = createContext({
   cities: [],
-  // cities: Array<City>,
 });
-
-// addCity: (name, lat, lon) => { },
 
 // Context
 // Context Provider
