@@ -30,24 +30,6 @@ export const WeatherContextProvider = ({ children }) => {
     fetchWeatherData();
   }, [cities.lat, cities.lon]);
 
-  // const fetchForecastData = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       `https://api.openweathermap.org/data/2.5/forecast?lat=${cities.lat}&lon=${cities.lon}&appid=${apiKey}&units=metric`
-  //     );
-  //     const parsedResponse = await response.json();
-  //     setForecast(parsedResponse);
-  //     console.log(parsedResponse);
-  //     // console.log(weatherNow);
-  //   } catch (error) {
-  //     console.error("Error fetching forecast data:", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchForecastData();
-  // }, [cities.lat, cities.lon]);
-
   return (
     <WeatherContext.Provider value={{ weatherNow, setWeatherNow }}>
       {children}
@@ -64,5 +46,3 @@ export const useWeatherContext = () => {
   }
   return context;
 };
-
-// Api Call for 5 day forecast : api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}

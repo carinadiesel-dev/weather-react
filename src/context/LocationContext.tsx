@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 import { useState } from "react";
 
 type City = {
-  city: string;
+  name: string;
   country: string;
   lat: number;
   lon: number;
