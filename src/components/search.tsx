@@ -31,18 +31,17 @@ export function Search() {
 
   const [options, setOptions] = useState();
 
-  const [query, setquery] = useState('')
-     const handleChange = (e) => {
-       setquery(e.target.value)
-     }
+  const [query, setquery] = useState("");
+  const handleChange = (e) => {
+    setquery(e.target.value);
+  };
 
   const [cityName, setCityName] = useState("");
 
-  const [open, setOpen] = useState(false)
-  const [value, setValue] = useState("")
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
 
-  const {cities,setCities} = useLocationContext();
-
+  const { cities, setCities } = useLocationContext();
 
   useEffect(() => {
     // This will trigger the fetchCityData function when cityName changes
@@ -63,19 +62,18 @@ export function Search() {
 
   const [data, setData] = useState();
 
-    const fetchCityData = async () => {
-
-      try {
-        const response = await fetch(
-          `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${apiKey}`
-        );
-        const parsedResponse = await response.json();
-        setOptions(parsedResponse);
-        console.log(parsedResponse);
-      } catch (error) {
-        console.error('Error fetching city data:', error);
-      }
-    };
+  const fetchCityData = async () => {
+    try {
+      const response = await fetch(
+        `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${apiKey}`
+      );
+      const parsedResponse = await response.json();
+      setOptions(parsedResponse);
+      console.log(parsedResponse);
+    } catch (error) {
+      console.error("Error fetching city data:", error);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -87,7 +85,8 @@ export function Search() {
         <DialogHeader>
           <DialogTitle className="text-3xl">Search for my City</DialogTitle>
           <DialogDescription className="text-lg">
-            Type in the name of your city and click on the "Search City" button,then select the correct option.
+            Type in the name of your city and click on the "Search City"
+            button,then select the correct option.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
@@ -106,23 +105,30 @@ export function Search() {
                 className="col-span-3"
               />
               <div>
-            <Button type="submit">Search</Button>
-          </div>
+                <Button type="submit">Search</Button>
+              </div>
             </div>
-            
           </div>
-           
-          
         </form>
-{options && <div className="flex flex-col gap-4">
+        {options && (
+          <div className="flex flex-col gap-4">
             {options?.map((el) => {
-              return <Button key={el} size={"lg"} variant={"outline"} onClick={()=> {setCities(el);
-              setOpen(false)}}>
-                {el.name}, {el.country}
-              </Button>
+              return (
+                <Button
+                  key={el}
+                  size={"lg"}
+                  variant={"outline"}
+                  onClick={() => {
+                    setCities(el);
+                    setOpen(false);
+                  }}
+                >
+                  {el.name}, {el.country}
+                </Button>
+              );
             })}
-          </div>}
-          
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );

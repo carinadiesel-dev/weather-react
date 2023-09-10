@@ -17,9 +17,6 @@ type SummaryProps = {
   location: string;
 };
 
-// TODO :
-//  1.) Maybe add a "feels like" temp index
-
 export function Summary() {
   const { width, height } = useWindowSize();
   const searchBtnSize = width >= 1024 ? `lg` : `xl`;
@@ -90,7 +87,7 @@ export function Summary() {
           <Icons.mapPin stroke="#a09fb1" strokeWidth={1} />
           {/* Location */}
           <span className="text-muted-foreground">
-            {cities && `${cities.name}, ${cities.country}`}
+            {weatherNow && `${weatherNow.name}`}
           </span>
         </div>
       </div>
