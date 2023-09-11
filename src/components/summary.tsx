@@ -5,7 +5,7 @@ import { Icons } from "./icons";
 import useWindowSize from "../hooks/useWindowSize";
 import example from "../assets/example.png";
 import clouds from "../assets/Cloud-background.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Search } from "./search";
 import { useLocationContext } from "../context/LocationContext";
 import { useWeatherContext } from "@/context/WeatherContext";
@@ -86,9 +86,7 @@ export function Summary() {
         <div className="flex justify-center gap-2 py-5 pb-16 text-lg">
           <Icons.mapPin stroke="#a09fb1" strokeWidth={1} />
           {/* Location */}
-          <span className="text-muted-foreground">
-            {weatherNow && `${weatherNow.name}`}
-          </span>
+          <span className="text-muted-foreground"></span>
         </div>
       </div>
     </div>
