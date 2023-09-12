@@ -72,7 +72,7 @@ export function Summary() {
             <img src={weatherIcon !== undefined ? weatherIconSource : ""} />
           </div>
           {/* Temperature in Celcius*/}
-          <div className="flex items-center pt-16 pb-10 py-7 lg:pt-28">
+          <div className="flex items-center pt-16 pb-10 py-7 lg:pt-16 2xl:pt-24">
             <span className="text-9xl">
               {main ? Math.round(main.temp) : "--"}
             </span>
@@ -99,7 +99,7 @@ export function Summary() {
             {/* {cities && `${cities.name}, ${cities.country}`} */}
           </span>
         </div>
-        <div className="flex w-full px-5 pt-5 -translate-y-10">
+        <div className="flex w-full px-5 pt-5 -translate-y-10 lg:-translate-y-14 2xl:-translate-y-2">
           <Search />
         </div>
       </div>
