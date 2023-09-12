@@ -5,11 +5,11 @@ import { Wind } from "./wind";
 
 export const Highlights = () => {
   return (
-    <div className="grid justify-stretch">
-      <h2 className="py-5 text-3xl font-medium text-center lg:text-5xl lg:pb-28 lg:pt-0">
+    <div className="grid my-10 justify-stretch">
+      <h2 className="py-16 text-[3rem] lg:text-5xl font-medium text-center lg:py-5 lg:pb-28 lg:pt-0">
         Today's Highlights
       </h2>
-      <div className="grid grid-rows-2 gap-8 xl:gap-10 lg:grid-cols-2">
+      <div className="grid grid-rows-2 gap-16 pb-5 lg:gap-10 lg:grid-cols-2">
         <Wind />
         <Humidity />
         <Visibility />

@@ -4,9 +4,9 @@ export const AirPressure = () => {
   const { weatherNow } = useWeatherContext();
   const main = weatherNow.main;
   return (
-    <div className="grid bg-mediumBlue place-items-center">
+    <div className="grid py-5 bg-mediumBlue place-items-center">
       <h3 className="text-xl">Air Pressure</h3>
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex items-center justify-center gap-4 py-5">
         <span className="font-bold text-8xl">
           {main ? main.pressure : "--"}
         </span>

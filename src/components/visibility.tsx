@@ -7,7 +7,7 @@ export const Visibility = () => {
     <div className="grid place-items-center bg-mediumBlue">
       <h3 className="pt-5 text-xl">Visibility</h3>
 
-      <div className="flex items-center justify-center gap-4 py-3">
+      <div className="flex items-center justify-center gap-4 py-5">
         <span className="font-bold text-8xl">
           {visibility ? visibility : "--"}
         </span>

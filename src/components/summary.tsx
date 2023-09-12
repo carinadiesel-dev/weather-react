@@ -60,7 +60,7 @@ export function Summary() {
   };
 
   return (
-    <div className="relative overflow-hidden lg:h-full bg-mediumBlue">
+    <div className="relative h-full overflow-hidden bg-mediumBlue">
       <div className="grid">
         <div className="flex flex-col items-center w-screen pt-20 overflow-hidden lg:w-full">
           {/* Weather Icon */}
@@ -72,7 +72,7 @@ export function Summary() {
             <img src={weatherIcon !== undefined ? weatherIconSource : ""} />
           </div>
           {/* Temperature in Celcius*/}
-          <div className="flex items-center py-7 xl:pt-28 xl:pb-10">
+          <div className="flex items-center pt-16 pb-10 py-7 lg:pt-28">
             <span className="text-9xl">
               {main ? Math.round(main.temp) : "--"}
             </span>
@@ -80,7 +80,7 @@ export function Summary() {
           </div>
 
           {/* Weather Condition */}
-          <span className="py-2 text-5xl text-muted-foreground">
+          <span className="py-5 text-5xl text-muted-foreground">
             {weatherConditions ? weatherConditions[0].main : "--"}
           </span>
         </div>
@@ -92,14 +92,14 @@ export function Summary() {
           <span className="text-muted-foreground">{date}</span>
         </div>
 
-        <div className="flex justify-center gap-2 py-5 pb-16 text-lg">
+        <div className="flex justify-center gap-2 py-5 pb-16 text-lg lg:pb-16">
           <Icons.mapPin stroke="#a09fb1" strokeWidth={1} />
           {/* Location */}
           <span className="text-muted-foreground">
             {/* {cities && `${cities.name}, ${cities.country}`} */}
           </span>
         </div>
-        <div className="flex w-full px-5 pt-5">
+        <div className="flex w-full px-5 pt-5 -translate-y-10">
           <Search />
         </div>
       </div>
