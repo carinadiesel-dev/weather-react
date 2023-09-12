@@ -78,7 +78,9 @@ export function Search() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="secondary">Search</Button>
+        <Button size={"lg"} variant="secondary" className="w-full">
+          Search
+        </Button>
       </DialogTrigger>
 
       <DialogContent>

@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "./ui/button";
 import { Icons } from "./icons";
 import useWindowSize from "../hooks/useWindowSize";
@@ -17,6 +15,27 @@ type SummaryProps = {
   location: string;
 };
 
+// const [cityNameData, setCityNameData] = useState([]);
+
+// const apiKey = import.meta.env.VITE_API_KEY;
+
+// const fetchLocationCity = async (lat, lon) => {
+//   try {
+//     const response = await fetch(
+//       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&${lon}&appid=${apiKey}`
+//     );
+//     const parsedResponse = await response.json();
+//     setCityNameData(parsedResponse);
+//     console.log(parsedResponse);
+//   } catch (error) {
+//     console.error("Error fetching city data: ", error);
+//   }
+// };
+
+// useEffect(() => {
+//   fetchLocationCity(lat, lon);
+// }, [lat, lon]);
+
 export function Summary() {
   const { width, height } = useWindowSize();
   const searchBtnSize = width >= 1024 ? `lg` : `xl`;
@@ -24,6 +43,7 @@ export function Summary() {
 
   const [isShown, setIsShown] = useState(false);
   const { cities } = useLocationContext();
+  const coords = cities.coords;
 
   const { weatherNow } = useWeatherContext();
   const main = weatherNow.main;
@@ -40,30 +60,19 @@ export function Summary() {
   };
 
   return (
-    <div className="relative overflow-hidden lg:h-screen bg-mediumBlue">
-      <div className="flex flex-col">
-        <div className="flex justify-between px-5 py-5">
-          <Search />
-          <div className="flex items-center justify-center p-2 rounded-full bg-secondary">
-            <button>
-              <Icons.detectLocation />
-            </button>
-          </div>
-        </div>
-
-        <div className="flex flex-col items-center w-screen pt-10 overflow-hidden lg:w-full">
+    <div className="relative overflow-hidden lg:h-full bg-mediumBlue">
+      <div className="grid">
+        <div className="flex flex-col items-center w-screen pt-20 overflow-hidden lg:w-full">
           {/* Weather Icon */}
-          <div className="relative pt-16">
+          <div className="relative py-20">
             <div className="absolute overflow-hidden w-[35rem] -left-64 -top-10 opacity-20">
               <img src={clouds} />
             </div>
 
-            <img
-              src={weatherIcon !== undefined ? weatherIconSource : example}
-            />
+            <img src={weatherIcon !== undefined ? weatherIconSource : ""} />
           </div>
-          {/* Temperature in Celcius and Farenheit */}
-          <div className="flex items-center py-7 xl:pt-28">
+          {/* Temperature in Celcius*/}
+          <div className="flex items-center py-7 xl:pt-28 xl:pb-10">
             <span className="text-9xl">
               {main ? Math.round(main.temp) : "--"}
             </span>
@@ -71,7 +80,7 @@ export function Summary() {
           </div>
 
           {/* Weather Condition */}
-          <span className="py-5 text-5xl xl:py-10 text-muted-foreground">
+          <span className="py-2 text-5xl text-muted-foreground">
             {weatherConditions ? weatherConditions[0].main : "--"}
           </span>
         </div>
@@ -86,7 +95,12 @@ export function Summary() {
         <div className="flex justify-center gap-2 py-5 pb-16 text-lg">
           <Icons.mapPin stroke="#a09fb1" strokeWidth={1} />
           {/* Location */}
-          <span className="text-muted-foreground"></span>
+          <span className="text-muted-foreground">
+            {/* {cities && `${cities.name}, ${cities.country}`} */}
+          </span>
+        </div>
+        <div className="flex w-full px-5 pt-5">
+          <Search />
         </div>
       </div>
     </div>

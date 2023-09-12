@@ -1,7 +1,6 @@
 import { createContext, useContext } from "react";
 import { useState, useEffect } from "react";
 import { useWeatherContext } from "./WeatherContext";
-useWeatherContext;
 
 type City = {
   name: string;
@@ -19,13 +18,12 @@ export const GeoLocationContext = createContext({
 // Hook
 
 export const GeoLocationContextProvider = ({ children }) => {
-  const [cities, setCities] = useState([]);
   const { weatherNow } = useWeatherContext();
 
-  const coords = weatherNow.coord;
+  // const coords = weatherNow.coord;
 
-  //   const lat = coords.lat;
-  //   const lon = coords.lon;
+  // const lat = coords.lat;
+  // const lon = coords.lon;
 
   const [cityNameData, setCityNameData] = useState([]);
 
@@ -34,7 +32,7 @@ export const GeoLocationContextProvider = ({ children }) => {
   const fetchLocationCity = async () => {
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&${coords.lon}&appid=${apiKey}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&${lon}&appid=${apiKey}`
       );
       const parsedResponse = await response.json();
       setCityNameData(parsedResponse);
@@ -46,7 +44,7 @@ export const GeoLocationContextProvider = ({ children }) => {
 
   useEffect(() => {
     fetchLocationCity();
-  }, [coords.lat, coords.lon]);
+  }, [weatherNow.coord.lon, weatherNow.coord.lat]);
   return (
     <GeoLocationContext.Provider value={{ cityNameData, setCityNameData }}>
       {children}

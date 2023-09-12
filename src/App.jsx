@@ -34,14 +34,6 @@ function App() {
         </div>
         {/* </GeoLocationContextProvider> */}
         <div className="flex flex-col items-center justify-center lg:w-4/5">
-          {/* <div className="flex flex-col w-3/4 gap-8 lg:gap-2 xl:gap lg:justify-between xl:flex-row">
-        <DatedForecast />
-        <DatedForecast />
-        <DatedForecast />
-        <DatedForecast />
-        <DatedForecast />
-      </div> */}
-
           <div className="w-3/4">
             <Highlights />
           </div>
