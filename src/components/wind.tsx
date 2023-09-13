@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { Icons } from "./icons";
 import { useWeatherContext } from "@/context/WeatherContext";
 
-function degToCompass(num?: number) {
+function degToCompass(num: number) {
   let val = Math.floor(num / 22.5 + 0.5);
   const arr = [
     "N",

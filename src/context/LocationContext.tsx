@@ -1,22 +1,18 @@
 import { createContext, useContext } from "react";
 import { useState } from "react";
 
-type City = {
-  name: string;
-  country: string;
-  lat: number;
-  lon: number;
+type City = { cities: any[]; setCities: any; lat?: Number; lon?: Number };
+type Props = {
+  children?: React.ReactNode;
 };
 
-export const LocationContext = createContext({
-  cities: [],
-});
+export const LocationContext = createContext<City>({});
 
 // Context
 // Context Provider
 // Hook
 
-export const LocationContextProvider = ({ children }) => {
+export const LocationContextProvider = ({ children }: Props) => {
   const [cities, setCities] = useState([]);
   return (
     <LocationContext.Provider value={{ cities, setCities }}>
