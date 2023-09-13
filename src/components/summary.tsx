@@ -15,27 +15,6 @@ type SummaryProps = {
   location: string;
 };
 
-// const [cityNameData, setCityNameData] = useState([]);
-
-// const apiKey = import.meta.env.VITE_API_KEY;
-
-// const fetchLocationCity = async (lat, lon) => {
-//   try {
-//     const response = await fetch(
-//       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&${lon}&appid=${apiKey}`
-//     );
-//     const parsedResponse = await response.json();
-//     setCityNameData(parsedResponse);
-//     console.log(parsedResponse);
-//   } catch (error) {
-//     console.error("Error fetching city data: ", error);
-//   }
-// };
-
-// useEffect(() => {
-//   fetchLocationCity(lat, lon);
-// }, [lat, lon]);
-
 export function Summary() {
   const { width, height } = useWindowSize();
   const searchBtnSize = width >= 1024 ? `lg` : `xl`;
@@ -43,7 +22,6 @@ export function Summary() {
 
   const [isShown, setIsShown] = useState(false);
   const { cities } = useLocationContext();
-  const coords = cities.coords;
 
   const { weatherNow } = useWeatherContext();
   const main = weatherNow.main;
@@ -59,6 +37,32 @@ export function Summary() {
     setIsShown((current) => !current);
   };
 
+  const [cityNameData, setCityNameData] = useState([]);
+  const coords = weatherNow.coord;
+  const lat = coords?.lat;
+  const lon = coords?.lon;
+
+  const apiKey = import.meta.env.VITE_API_KEY;
+
+  const fetchLocationCity = async () => {
+    try {
+      const response = await fetch(
+        `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${apiKey}`
+      );
+      const parsedResponse = await response.json();
+      setCityNameData(parsedResponse);
+      console.log(parsedResponse);
+    } catch (error) {
+      console.error("Error fetching city data: ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLocationCity();
+  }, [lat, lon]);
+
+  console.log(lat, lon);
+  console.log(cityNameData);
   return (
     <div className="relative h-full overflow-hidden bg-mediumBlue">
       <div className="grid">
@@ -97,9 +101,11 @@ export function Summary() {
           {/* Location */}
           <span className="text-muted-foreground">
             {/* {cities && `${cities.name}, ${cities.country}`} */}
+            {cityNameData &&
+              `${cityNameData[0]?.name} , ${cityNameData[0]?.country}`}
           </span>
         </div>
-        <div className="flex w-full px-5 pt-5 -translate-y-10 lg:-translate-y-14 2xl:-translate-y-2">
+        <div className="flex w-full px-5 pt-5 -translate-y-10 lg:-translate-y-14 2xl:-translate-y-5">
           <Search />
         </div>
       </div>

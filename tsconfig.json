@@ -19,7 +19,8 @@
     "paths": {
       "@/*": ["*"]
     },
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "strictNullChecks": true
   },
   "include": ["src"],
   "references": [{ "path": "tsconfig.node.json" }]

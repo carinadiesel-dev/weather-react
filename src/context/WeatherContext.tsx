@@ -8,6 +8,8 @@ export const WeatherContext = createContext({
 
 export const WeatherContextProvider = ({ children }) => {
   const [weatherNow, setWeatherNow] = useState([]);
+  const [lat, setLat] = useState(null);
+  const [lon, setLon] = useState(null);
 
   // const [forecast, setForecast] = useState([]);
 
@@ -20,44 +22,6 @@ export const WeatherContextProvider = ({ children }) => {
     data: { latitude, longitude },
   } = useGeolocation();
 
-  // if (cities === undefined) {
-  //   const fetchLocationWeatherData = () => {
-  //
-  //     fetch(
-  //       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
-  //     )
-  //       .then((response) => {
-  //         return response.json();
-  //       })
-  //       .then((data) => {
-  //         setWeatherNow(data);
-  //         console.log(latitude);
-  //       });
-  //   };
-  //   useEffect(() => {
-  //     fetchLocationWeatherData();
-  //   }, []);
-  // } else {
-  //   const fetchWeatherData = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `https://api.openweathermap.org/data/2.5/weather?lat=${cities.lat}&lon=${cities.lon}&appid=${apiKey}&units=metric`
-  //       );
-  //       const parsedResponse = await response.json();
-  //       setWeatherNow(parsedResponse);
-  //       console.log(parsedResponse);
-  //       console.log(latitude);
-  //       // console.log(weatherNow);
-  //     } catch (error) {
-  //       console.error("Error fetching weather data:", error);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     fetchWeatherData();
-  //   }, [cities.lat, cities.lon]);
-  // }
-
   const fetchWeatherData = async () => {
     try {
       let apiUrl;
@@ -68,6 +32,8 @@ export const WeatherContextProvider = ({ children }) => {
       } else if (latitude && longitude) {
         // Use latitude and longitude if cities.lat and cities.lon are not available
         apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+        setLat(latitude);
+        setLon(longitude);
       } else {
         console.error("No location data available");
         return;
@@ -89,7 +55,9 @@ export const WeatherContextProvider = ({ children }) => {
   }, [cities.lat, cities.lon, latitude, longitude]);
 
   return (
-    <WeatherContext.Provider value={{ weatherNow, setWeatherNow }}>
+    <WeatherContext.Provider
+      value={{ weatherNow, setWeatherNow, lat, setLat, lon, setLon }}
+    >
       {children}
     </WeatherContext.Provider>
   );
