@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { Icons } from "./icons";
 import { useWeatherContext } from "@/context/WeatherContext";
 
-function degToCompass(num: number) {
+function degToCompass(num?: number) {
   let val = Math.floor(num / 22.5 + 0.5);
   const arr = [
     "N",
@@ -31,12 +31,10 @@ function degToCompass(num: number) {
 export const Wind = () => {
   const { weatherNow } = useWeatherContext();
   const wind = weatherNow.wind;
-  // const { speed, deg, gust } = wind;
-  // let degrees = wind.deg;
-  // let direction;
-  // if (wind.deg) {
-  //   direction = degToCompass(degrees);
-  // }
+
+  let degrees = wind?.deg;
+  let direction = degToCompass(degrees);
+
   return (
     <div className="grid place-items-center bg-mediumBlue">
       <h3 className="py-5 text-xl">Wind Status</h3>
@@ -48,15 +46,8 @@ export const Wind = () => {
       </div>
 
       <div className="flex items-center gap-2 py-3">
-        {/* Wind Direction */}
-        {/* <div>
-          {/* Wind Icon
-          <Icons.direction />
-        </div> */}
         {/* Wind direction abbreviation */}
-        <span className="text-xl">
-          {/* {direction !== undefined ? direction : "--"} */}
-        </span>
+        <span className="text-xl">{weatherNow && `${direction}`}</span>
       </div>
     </div>
   );

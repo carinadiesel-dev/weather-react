@@ -20,19 +20,16 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useWeatherContext } from "./context/WeatherContext";
 import { WeatherContextProvider } from "./context/WeatherContext.tsx";
-import { GeoLocationContextProvider } from "./context/GeoLocationContext";
 
 function App() {
   return (
     <section className="flex flex-col lg:flex-row font-raleway">
       <WeatherContextProvider>
-        {/* <GeoLocationContextProvider> */}
         <div
           className={` flex flex-col h-screen gap-8 lg:space-around bg-inherit w-full lg:w-1/4 `}
         >
           <Summary />
         </div>
-        {/* </GeoLocationContextProvider> */}
         <div className="flex flex-col items-center justify-center lg:w-4/5">
           <div className="w-3/4">
             <Highlights />
