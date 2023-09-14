@@ -47,7 +47,7 @@ export function Summary() {
   const fetchLocationCity = async () => {
     try {
       const response = await fetch(
-        `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${apiKey}`
+        `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${apiKey}`
       );
       const parsedResponse = await response.json();
       setCityNameData(parsedResponse);
