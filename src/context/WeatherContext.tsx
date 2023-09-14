@@ -2,11 +2,35 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { LocationContext, useLocationContext } from "./LocationContext";
 import useGeolocation from "../hooks/useGeoLocation";
 
-export const WeatherContext = createContext({
-  cities: [],
-});
+type Forecast = {
+  cities: any[];
+  temperature: Number;
+  condition: string;
+  lat?: Number;
+  lon?: Number;
+  icon: string;
+  today: string;
+  date: string;
+  country: string;
+  cityName: string;
+};
 
-export const WeatherContextProvider = ({ children }) => {
+type ForecastContextType = {
+  weatherNow: Forecast[];
+  setWeatherNow: any;
+  lat?: Number | null;
+  lon?: Number | null;
+  setLon: any;
+  setLat: any;
+};
+
+type Props = {
+  children?: React.ReactNode;
+};
+
+export const WeatherContext = createContext<ForecastContextType | null>(null);
+
+export const WeatherContextProvider = ({ children }: Props) => {
   const [weatherNow, setWeatherNow] = useState([]);
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
@@ -19,18 +43,21 @@ export const WeatherContextProvider = ({ children }) => {
   const {
     loading,
     error,
+    // @ts-ignore
     data: { latitude, longitude },
   } = useGeolocation();
 
   const fetchWeatherData = async () => {
     try {
       let apiUrl;
-
+      // @ts-ignore
       if (cities.lat && cities.lon) {
         // Use cities.lat and cities.lon if available
+        // @ts-ignore
         apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${cities.lat}&lon=${cities.lon}&appid=${apiKey}&units=metric`;
       } else if (latitude && longitude) {
         // Use latitude and longitude if cities.lat and cities.lon are not available
+        // @ts-ignore
         apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
         setLat(latitude);
         setLon(longitude);
@@ -52,6 +79,7 @@ export const WeatherContextProvider = ({ children }) => {
 
   useEffect(() => {
     fetchWeatherData();
+    // @ts-ignore
   }, [cities.lat, cities.lon, latitude, longitude]);
 
   return (

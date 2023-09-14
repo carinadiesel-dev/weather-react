@@ -105,7 +105,7 @@ export function Summary() {
               `${cityNameData[0]?.name} , ${cityNameData[0]?.country}`}
           </span>
         </div>
-        <div className="flex w-full px-5 pt-5 -translate-y-10 lg:-translate-y-14 2xl:-translate-y-5">
+        <div className="flex w-full px-5 pt-5 -translate-y-10 lg:-translate-y-14 2xl:-translate-y-10">
           <Search />
         </div>
       </div>

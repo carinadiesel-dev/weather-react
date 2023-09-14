@@ -20,10 +20,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useWeatherContext } from "./context/WeatherContext";
 import { WeatherContextProvider } from "./context/WeatherContext.tsx";
+import { Skeleton } from "./components/ui/skeleton";
 
 function App() {
   return (
     <section className="flex flex-col lg:flex-row font-raleway">
+      <Skeleton />
       <WeatherContextProvider>
         <div
           className={` flex flex-col h-screen gap-8 lg:space-around bg-inherit w-full lg:w-1/4 `}

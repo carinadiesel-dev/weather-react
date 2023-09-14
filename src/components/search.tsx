@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, Key, useEffect, useState } from "react";
 import axios from "axios";
 import { useRef } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,18 +22,21 @@ import {
 
 import { useLocationContext } from "@/context/LocationContext";
 
-type SearchProps = {};
+type SearchProps = {
+  latitude: Number;
+  longitude: Number;
+};
 
 const apiKey = import.meta.env.VITE_API_KEY;
 
 export function Search() {
   const apiKey = import.meta.env.VITE_API_KEY;
 
-  const [options, setOptions] = useState();
+  const [options, setOptions] = useState([]);
 
   const [query, setquery] = useState("");
-  const handleChange = (e) => {
-    setquery(e.target.value);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setquery(event.target.value);
   };
 
   const [cityName, setCityName] = useState("");
@@ -50,7 +53,7 @@ export function Search() {
     }
   }, [cityName]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.SyntheticEvent) => {
     // console.log("handleSubmit ran");
     event.preventDefault();
 
@@ -114,7 +117,7 @@ export function Search() {
         </form>
         {options && (
           <div className="flex flex-col gap-4">
-            {options?.map((el) => {
+            {options?.map((el: any) => {
               return (
                 <Button
                   key={el}
