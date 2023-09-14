@@ -68,7 +68,7 @@ export function Search() {
   const fetchCityData = async () => {
     try {
       const response = await fetch(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${apiKey}`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${apiKey}`
       );
       const parsedResponse = await response.json();
       setOptions(parsedResponse);
